@@ -1,0 +1,66 @@
+Source: golang-github-unknwon-paginater
+Section: devel
+Priority: extra
+Maintainer: Debian Go Packaging Team <pkg-go-maintainers@lists.alioth.debian.org>
+Uploaders: Sandor Bodo-Merle <sandor.bodo-merle@eli-alps.hu>
+Build-Depends: debhelper (>= 9),
+               dh-golang,
+               golang-go,
+               golang-github-smartystreets-goconvey-dev
+Standards-Version: 3.9.7
+Homepage: https://github.com/Unknwon/paginater
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-go/packages/golang-github-unknwon-paginater.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-go/packages/golang-github-unknwon-paginater.git
+XS-Go-Import-Path: github.com/Unknwon/paginater
+
+Package: golang-github-unknwon-paginater-dev
+Architecture: all
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         golang-go,
+         golang-github-smartystreets-goconvey-dev
+Description: Package paginater is a helper module for custom pagination calculation.
+ Paginater Build Status
+ (https://drone.io/github.com/Unknwon/paginater/latest)
+ [](http://gocover.io/github.com/Unknwon/paginater) Package paginater is
+ a helper module for custom pagination calculation.  Installationgo get
+ github.com/Unknwon/paginater Getting Started The following code shows
+ an example of how to use paginater:
+ .
+ ```go package main
+ .
+ import "github.com/Unknwon/paginater"
+ .
+ func main() {
+     // Arguments: // - Total number of rows // - Number of rows in
+     one page // - Current page number // - Number of page links p :=
+     paginater.New(45, 10, 3, 3)
+ // Then use p as a template object named "Page" in "demo.html" // ...
+ .
+ } ```
+ .
+ demo.html
+ .
+ ```html {{if not .Page.IsFirst}}First (1){{end}} {{if
+ .Page.HasPrevious}}Previous ({{.Page.Previous}}){{end}}
+ .
+ {{range .Page.Pages}}
+     {{if eq .Num -1}} ...  {{else}} {{.Num}}{{if
+     .IsCurrent}}(current){{end}} {{end}}
+ {{end}}
+ .
+ {{if .Page.HasNext}}Next ({{.Page.Next}}){{end}} {{if not
+ .Page.IsLast}}Last ({{.Page.TotalPages}}){{end}} ```
+ .
+ Possible output:
+ .
+ .
+ [First](1) [Previous](2) ... 2 3(current) 4 ... [Next](4) [Last](5)
+ .
+ .
+ As you may guess, if the Page value is -1, you should print ... in
+ the HTML as common practice.  Getting Help• API Documentation
+ (https://gowalker.org/github.com/Unknwon/paginater)• File An Issue
+ (https://github.com/Unknwon/paginater/issues/new)License This project
+ is under Apache v2 License. See the LICENSE (LICENSE) file for the full
+ license text.
